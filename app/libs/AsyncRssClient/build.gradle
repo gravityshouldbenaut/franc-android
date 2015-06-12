@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.12.2'
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository url: "file://${projectDir}/repository"
+            pom.groupId = 'rejasupotaro'
+            pom.artifactId = 'async-rss-client'
+            pom.version = '0.0.6'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion '21.0.2'
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 21
+    }
+}
+
+dependencies {
+    compile 'com.loopj.android:android-async-http:1.4.4'
+}

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">franc</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_invest">Invest</string>
+    <string name="title_activity_bitcoin">Bitcoin</string>
+    <string name="title_activity_nasdaq">NASDAQ</string>
+    <string name="title_activity_property">Property</string>
+    <string name="title_activity_nyse">NYSE</string>
+</resources>

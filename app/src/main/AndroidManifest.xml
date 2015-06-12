@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.franc" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Invest"
+            android:label="@string/title_activity_invest" >
+        </activity>
+        <activity
+            android:name=".Bitcoin"
+            android:label="@string/title_activity_bitcoin" >
+        </activity>
+        <activity
+            android:name=".NASDAQ"
+            android:label="@string/title_activity_nasdaq" >
+        </activity>
+        <activity
+            android:name=".Property"
+            android:label="@string/title_activity_property" >
+        </activity>
+        <activity
+            android:name=".NYSE"
+            android:label="@string/title_activity_nyse" >
+        </activity>
+    </application>
+
+</manifest>
