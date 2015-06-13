@@ -26,9 +26,7 @@ public class Invest extends ActionBarActivity {
     private URL nasdaqURL;
     private URL nyseURL;
     private ListView stocks;
-    private Button openNasdaq;
-    private Button openNYSE;
-    private Button openProperty;
+
     @Override
     protected void   onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +64,7 @@ public class Invest extends ActionBarActivity {
 //                        android.R.id.text2});
 //        stocks = (ListView) findViewById(R.id.stocks);
 //        stocks.setAdapter(stockAdapter);
-        openNasdaq = (Button) findViewById(R.id.nasdaq);
+        Button openNasdaq = (Button) findViewById(R.id.nasdaq);
         openNasdaq.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
@@ -76,17 +74,17 @@ public class Invest extends ActionBarActivity {
             }
         });
 
-        openNYSE = (Button) findViewById(R.id.nyse);
+        Button openNYSE = (Button) findViewById(R.id.nyse);
         openNYSE.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent openBitcoin = new Intent(Invest.this, Property.class);
+                Intent openBitcoin = new Intent(Invest.this, NYSE.class);
                 startActivity(openBitcoin);
                 return;
 
             }
         });
-        openProperty = (Button) findViewById(R.id.property);
+        Button openProperty = (Button) findViewById(R.id.property);
         openProperty.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
