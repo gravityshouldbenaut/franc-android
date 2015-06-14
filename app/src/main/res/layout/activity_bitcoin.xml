@@ -47,29 +47,19 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/price"
         android:layout_above="@+id/usd"
-        android:layout_alignRight="@+id/amt4p"
-        android:layout_alignEnd="@+id/amt4p" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Amount for purchase"
-        android:id="@+id/amt4p"
-        android:layout_below="@+id/usd"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp" />
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/amount"
+        android:hint="How much Bitcoin would you like to buy?"
         android:layout_marginBottom="79dp"
         android:layout_above="@+id/buy"
-        android:layout_alignRight="@+id/amt4p"
-        android:layout_alignEnd="@+id/amt4p"
-        android:layout_alignLeft="@+id/amt4p"
-        android:layout_alignStart="@+id/amt4p" />
+        android:layout_alignRight="@+id/eur"
+        android:layout_alignEnd="@+id/eur"
+        android:layout_alignLeft="@+id/usd"
+        android:layout_alignStart="@+id/usd" />
 
     <Button
         android:layout_width="wrap_content"

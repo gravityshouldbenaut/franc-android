@@ -3,6 +3,7 @@ package com.example.franc;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +27,7 @@ public class MainActivity extends ActionBarActivity {
     private static final String CLIENT_ID = "90b3d6115dbe834121a24c5f20c41d2aa4d84b1489bbf58578794df359713791";
     private static final String CLIENT_SECRET = "4476c4a33b862e1e33c122c6c7cd12d8c1829a27ee4daf33f3d3fdb29c7ef562";
     private static final String REDIRECT_URI = "franc://coinbase-oauth";
-
+    private static String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,7 @@ public class MainActivity extends ActionBarActivity {
                 // Perform action on click
                 try {
                     OAuth.beginAuthorization(MainActivity.this, CLIENT_ID, "user", REDIRECT_URI, null);
+
                 } catch (CoinbaseException ex) {
                     Toast.makeText(MainActivity.this, "There was an error redirecting to Coinbase: " + ex.getMessage(), Toast.LENGTH_SHORT);
                 }
@@ -99,12 +101,22 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public OAuthTokensResponse call() throws Exception {
+           // mIntent.putExtra("token", token);
+
             return OAuth.completeAuthorization(MainActivity.this, CLIENT_ID, CLIENT_SECRET, mIntent.getData());
         }
 
         @Override
         public void onSuccess(OAuthTokensResponse tokens) {
             // Do something with the tokens
+
+            token = tokens.getAccessToken();
+            if(token.equals(tokens.getAccessToken())) {
+                Log.w("Token", token);
+            }else{
+                Log.w("FAIL", "banana");
+            }
+            mIntent.putExtra("token", tokens.getAccessToken());
         }
 
         @Override
@@ -113,13 +125,23 @@ public class MainActivity extends ActionBarActivity {
         }
     }
     @Override
-    protected void onNewIntent(final Intent intent) {
-        if (intent != null && intent.getAction() != null && intent.getAction().equals("android.intent.action.VIEW")) {
-            new CompleteAuthorizationTask(intent).execute();
+    protected void onNewIntent(Intent intent) {
+        Intent i = new Intent();
+        i = intent;
+        if (i != null && i.getAction() != null && i.getAction().equals("android.intent.action.VIEW")) {
+            new CompleteAuthorizationTask(i).execute();
 
 
+        }
+    }
+    public static class Token{
+        private static String t;
 
-
+        public void setT(){
+            t = token;
+        }
+        public static String getT(){
+            return t;
         }
     }
 }

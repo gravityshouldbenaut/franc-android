@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coinbase.android.sdk.OAuth;
+import com.coinbase.api.Coinbase;
 import com.coinbase.api.entity.OAuthTokensResponse;
 import com.coinbase.api.exception.CoinbaseException;
 
@@ -34,13 +35,16 @@ private Button usd;
     private TextView price;
     private CoinbaseAccess coinbase;
     private EditText amount;
-
+    Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bitcoin);
+        Intent intent = this.getIntent();
         coinbase = new CoinbaseAccess();
+     coinbase.setOauth(MainActivity.Token.
+             getT());
 //        WebView webview = new WebView(this);
 //        setContentView(webview);
 //        webview.loadUrl("https://www.coinbase.com/");
@@ -98,10 +102,12 @@ private Button usd;
                 // Perform action on click
                 try {
                     coinbase.getCb().buy(Money.parse("BTC" + " " + amount.getText().toString()));
-                    Toast.makeText(Bitcoin.this, "You just bought" + " " + amount.getText().toString() + " " + "BTC", Toast.LENGTH_LONG);
-
+                    toast = Toast.makeText(Bitcoin.this, "You just bought" + " " + amount.getText().toString() + " " + "BTC", Toast.LENGTH_LONG);
+                    toast.show();
                 } catch (CoinbaseException | IOException e) {
                     e.printStackTrace();
+                    toast = Toast.makeText(Bitcoin.this, "Make sure you add a payment method to buy" + " " + amount.getText().toString() + " " + "BTC", Toast.LENGTH_LONG);
+                    toast.show();
                 }
                 startActivity(i);
                 return;
