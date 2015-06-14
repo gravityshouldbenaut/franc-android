@@ -1,5 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/Bitcoin">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="BTC ="
+        android:id="@+id/textView"
+        android:layout_marginTop="38dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/usd"
+        android:layout_alignStart="@+id/usd" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="USD"
+        android:id="@+id/usd"
+        android:layout_marginTop="48dp"
+        android:layout_below="@+id/textView"
+        android:layout_toLeftOf="@+id/gbp"
+        android:layout_toStartOf="@+id/gbp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GBP"
+        android:id="@+id/gbp"
+        android:layout_alignTop="@+id/usd"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EUR"
+        android:id="@+id/eur"
+        android:layout_alignTop="@+id/gbp"
+        android:layout_toRightOf="@+id/gbp"
+        android:layout_toEndOf="@+id/gbp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/price"
+        android:layout_above="@+id/usd"
+        android:layout_alignRight="@+id/amt4p"
+        android:layout_alignEnd="@+id/amt4p" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Amount for purchase"
+        android:id="@+id/amt4p"
+        android:layout_below="@+id/usd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/amount"
+        android:layout_marginBottom="79dp"
+        android:layout_above="@+id/buy"
+        android:layout_alignRight="@+id/amt4p"
+        android:layout_alignEnd="@+id/amt4p"
+        android:layout_alignLeft="@+id/amt4p"
+        android:layout_alignStart="@+id/amt4p" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buy"
+        android:id="@+id/buy"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/usd"
+        android:layout_toEndOf="@+id/usd"
+        android:layout_marginBottom="61dp" />
 
 </RelativeLayout>

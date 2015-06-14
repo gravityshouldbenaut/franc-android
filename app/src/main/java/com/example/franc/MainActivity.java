@@ -7,8 +7,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.coinbase.android.sdk.OAuth;
+import com.coinbase.api.entity.OAuthTokensResponse;
+import com.coinbase.api.exception.CoinbaseException;
 
 import java.io.IOException;
+
+import roboguice.util.RoboAsyncTask;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -16,7 +23,9 @@ public class MainActivity extends ActionBarActivity {
     Button oInv;
     Button oSen;
     Button oBit;
-
+    private static final String CLIENT_ID = "90b3d6115dbe834121a24c5f20c41d2aa4d84b1489bbf58578794df359713791";
+    private static final String CLIENT_SECRET = "4476c4a33b862e1e33c122c6c7cd12d8c1829a27ee4daf33f3d3fdb29c7ef562";
+    private static final String REDIRECT_URI = "franc://coinbase-oauth";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +55,11 @@ public class MainActivity extends ActionBarActivity {
         oBit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
-                Intent openBitcoin = new Intent(MainActivity.this, Bitcoin.class);
-                startActivity(openBitcoin);
+                try {
+                    OAuth.beginAuthorization(MainActivity.this, CLIENT_ID, "user", REDIRECT_URI, null);
+                } catch (CoinbaseException ex) {
+                    Toast.makeText(MainActivity.this, "There was an error redirecting to Coinbase: " + ex.getMessage(), Toast.LENGTH_SHORT);
+                }
                 return;
 
             }
@@ -76,5 +88,38 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public class CompleteAuthorizationTask extends RoboAsyncTask<OAuthTokensResponse> {
+        private Intent mIntent;
+
+        public CompleteAuthorizationTask(Intent intent) {
+            super(MainActivity.this);
+            mIntent = intent;
+        }
+
+        @Override
+        public OAuthTokensResponse call() throws Exception {
+            return OAuth.completeAuthorization(MainActivity.this, CLIENT_ID, CLIENT_SECRET, mIntent.getData());
+        }
+
+        @Override
+        public void onSuccess(OAuthTokensResponse tokens) {
+            // Do something with the tokens
+        }
+
+        @Override
+        public void onException(Exception ex) {
+            // Authorization failed for whatever reason
+        }
+    }
+    @Override
+    protected void onNewIntent(final Intent intent) {
+        if (intent != null && intent.getAction() != null && intent.getAction().equals("android.intent.action.VIEW")) {
+            new CompleteAuthorizationTask(intent).execute();
+
+
+
+
+        }
     }
 }
