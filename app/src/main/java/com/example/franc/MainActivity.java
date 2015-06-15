@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.coinbase.android.sdk.OAuth;
 import com.coinbase.api.entity.OAuthTokensResponse;
 import com.coinbase.api.exception.CoinbaseException;
+import com.parse.ParseUser;
+import com.parse.ui.ParseLoginBuilder;
 
 import java.io.IOException;
 
@@ -28,10 +30,16 @@ public class MainActivity extends ActionBarActivity {
     private static final String CLIENT_SECRET = "4476c4a33b862e1e33c122c6c7cd12d8c1829a27ee4daf33f3d3fdb29c7ef562";
     private static final String REDIRECT_URI = "franc://coinbase-oauth";
     private static String token;
+    ParseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(user != ParseUser.getCurrentUser()){
+            ParseLoginBuilder builder = new ParseLoginBuilder(MainActivity.this);
+            startActivityForResult(builder.build(), 0);
+            user = ParseUser.getCurrentUser();
+        }
        oInv  = (Button) findViewById(R.id.invest);
         oInv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

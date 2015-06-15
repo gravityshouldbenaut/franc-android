@@ -33,7 +33,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.coinbase.android:coinbase-android-sdk:1.0.1'
     compile 'org.roboguice:roboguice:3.+'
+    compile project(':ParseLoginUI')
 
+    compile 'com.parse.bolts:bolts-android:1.+'
 
 
 }
